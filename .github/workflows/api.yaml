@@ -6,7 +6,7 @@ on:
       - '.github/workflows/api.yml'
 
 jobs:
-  test: # new
+  test:
     strategy:
       fail-fast: false
       matrix:
@@ -18,8 +18,8 @@ jobs:
       run:
         working-directory: services/tasks_api
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install poetry
@@ -31,9 +31,10 @@ jobs:
       - name: Run tests
         run: poetry run pytest tests.py --cov=./ --cov-report=xml
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          slug: etoews/tasks
   code-quality:
     strategy:
       fail-fast: false
@@ -46,8 +47,8 @@ jobs:
       run:
         working-directory: services/tasks_api
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install poetry
