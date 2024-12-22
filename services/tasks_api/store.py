@@ -18,6 +18,8 @@ class TaskStore:
             Item={
                 "PK": f"#{task.owner}",
                 "SK": f"#{task.id}",
+                "GS1PK": f"#{task.owner}#{task.status.value}",
+                "GS1SK": f"#{datetime.datetime.utcnow().isoformat()}",
                 "id": str(task.id),
                 "title": task.title,
                 "status": task.status.value,
@@ -39,22 +41,6 @@ class TaskStore:
             title=record["Item"]["title"],
             owner=record["Item"]["owner"],
             status=TaskStatus[record["Item"]["status"]],
-        )
-
-    def add(self, task):
-        dynamodb = boto3.resource("dynamodb")
-        table = dynamodb.Table(self.table_name)
-        table.put_item(
-            Item={
-                "PK": f"#{task.owner}",
-                "SK": f"#{task.id}",
-                "GS1PK": f"#{task.owner}#{task.status.value}",
-                "GS1SK": f"#{datetime.datetime.utcnow().isoformat()}",
-                "id": str(task.id),
-                "title": task.title,
-                "status": task.status.value,
-                "owner": task.owner,
-            }
         )
 
     def list_open(self, owner):
