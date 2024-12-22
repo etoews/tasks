@@ -9,7 +9,6 @@ from starlette.testclient import TestClient
 from main import app
 from models import Task, TaskStatus
 from store import TaskStore
-from main import app
 
 
 @pytest.fixture
