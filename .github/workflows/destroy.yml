@@ -38,6 +38,8 @@ jobs:
           node-version: '18.x'
       - name: Install Serverless Framework
         run: npm install -g serverless
+      - name: Install serverless-s3-sync
+        run: npm install --include=dev serverless-s3-sync
       - name: Install NPM dependencies
         run: npm install
       - name: Destroy
