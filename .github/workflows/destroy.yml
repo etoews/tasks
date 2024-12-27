@@ -6,17 +6,7 @@ env:
   AWS_DEFAULT_REGION: ap-southeast-2
   APP_ENVIRONMENT: development
 jobs:
-  destroy-global-infrastructure:
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: infrastructure
-    steps:
-      - uses: actions/checkout@v3
-      - name: Destroy global infrastructure
-        run:  aws cloudformation delete-stack --stack-name ${APP_ENVIRONMENT}-tasks-check
   destroy-api:
-    needs: [destroy-global-infrastructure]
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -36,7 +26,6 @@ jobs:
         env:
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
   destroy-ui:
-    needs: [destroy-global-infrastructure]
     runs-on: ubuntu-latest
     defaults:
       run:
