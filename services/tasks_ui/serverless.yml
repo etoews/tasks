@@ -3,7 +3,6 @@ service: tasks-api
 frameworkVersion: '4'
 useDotenv: true
 
-
 provider:
   name: aws
   region: ${opt:region, 'ap-southeast-2'}
@@ -12,7 +11,6 @@ provider:
 plugins:
   - serverless-s3-sync
 
-
 custom:
   stage: ${opt:stage, self:provider.stage}
   bucketName: ${self:custom.stage}-tasks-api-etoews
@@ -20,7 +18,6 @@ custom:
     # A simple configuration for copying static assets
     - bucketName: ${self:custom.bucketName}
       localDir: dist
-
 
 resources:
   Resources:
