@@ -1,5 +1,6 @@
 name: API Test and deploy
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'services/tasks_api/**'

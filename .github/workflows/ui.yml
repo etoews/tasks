@@ -1,5 +1,6 @@
 name: UI deploy
 on:
+  workflow_dispatch:
   push:
     paths:
       - 'services/tasks_ui/**'
